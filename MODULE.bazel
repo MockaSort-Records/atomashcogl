@@ -2,9 +2,14 @@ module(
     name = "atomashcogl",
 )
 
-bazel_dep(name = "buildifier_prebuilt", version = "8.0.1",dev_dependency = True,)
+#tools deps
+bazel_dep(name = "buildifier_prebuilt", version = "8.0.1", dev_dependency = True)
 
+#project deps
 bazel_dep(name = "platforms", version = "0.0.11")
+bazel_dep(name = "aspect_bazel_lib", version = "2.14.0")
 
+#toolchain and platform registrations
 register_toolchains("@//toolchains:idf_toolchain")
+
 register_execution_platforms("@//platforms:esp32")
