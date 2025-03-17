@@ -7,11 +7,12 @@ def _containerized_toolchain_impl(ctx):
 containerized_toolchain = rule(
     implementation = _containerized_toolchain_impl,
     attrs = {
-        "image": attr.string(mandatory = True), 
-        "tool": attr.label(            
+        "image": attr.string(mandatory = True),
+        "tool": attr.label(
             allow_single_file = True,
             mandatory = True,
             executable = True,
-            cfg = "host",),  
+            cfg = "host",
+        ),
     },
 )

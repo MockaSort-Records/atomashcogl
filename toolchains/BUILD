@@ -5,19 +5,20 @@ package(default_visibility = ["//visibility:public"])
 toolchain_type(
     name = "conteinerized_toolchain_type",
 )
+
 containerized_toolchain(
     name = "idf_toolchain_impl",
     image = "espressif/idf:latest",
-    tool = ":build_wrapper"
+    tool = ":build_wrapper",
 )
 
 toolchain(
     name = "idf_toolchain",
-    toolchain_type = ":conteinerized_toolchain_type",
     exec_compatible_with = [
         "@//platforms:idf",
     ],
     toolchain = ":idf_toolchain_impl",
+    toolchain_type = ":conteinerized_toolchain_type",
 )
 
 filegroup(
