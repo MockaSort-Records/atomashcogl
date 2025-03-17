@@ -1,0 +1,1 @@
+build:esp32 --platforms=@//platforms:esp32

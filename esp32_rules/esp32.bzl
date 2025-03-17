@@ -22,17 +22,23 @@ def _esp32_application_impl(ctx):
     
     return [DefaultInfo(files = depset([application_img, partition_img, bootloader_img, flasher_args]))]
   
-esp32_application = rule(
+esp32_application_internal = rule(
     implementation = _esp32_application_impl,
     attrs = {
         "srcs": attr.label_list(allow_files = True),  # Source files
-        "idf_deps": attr.string_list(default=[]),
+        "idf_deps": attr.string_list(),
     },
     toolchains = ["@//toolchains:conteinerized_toolchain_type"],  # Use the toolchain
 )
 
-    # target_compatible_with = select({
-    #     "@platforms//os:osx": [],
-    #     "@platforms//os:linux": [],
-    #     "//conditions:default": ["@platforms//:incompatible"],
-    # })
+def esp32_application(name, srcs, idf_deps = [], visibility = ["//visibility:public"]):
+    esp32_application_internal(
+        name=name,
+        srcs=srcs,
+        idf_deps=idf_deps,
+        visibility=visibility,
+        target_compatible_with = select({
+            "@//platforms:idf": [],
+            "//conditions:default": ["@platforms//:incompatible"],
+        }),
+    )
