@@ -34,3 +34,4 @@
 
 #Bazel build folders
 /bazel-*
+/*.bazel.lock
