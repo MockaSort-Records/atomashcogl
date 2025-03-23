@@ -14,9 +14,9 @@ bazel_dep(name = "rules_oci", version = "2.2.3")
 atomvm = use_extension("//:third_party/atomvm/extentions.bzl", "atomvm")
 use_repo(atomvm, "atomvm")
 
+#to be moved in separate module
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 
-#to be moved in separate module
 oci.pull(
     name = "idf_image_linux_amd64",
     digest = "sha256:af084bbf1fbb9f851d0a99f98999ab316441c78ac214ec9da379907cdda63340",
