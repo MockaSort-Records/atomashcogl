@@ -1,1 +1,2 @@
+build --workspace_status_command=./tools/set_ws_stable_vars.sh
 build:esp32 --platforms=@//platforms:esp32
