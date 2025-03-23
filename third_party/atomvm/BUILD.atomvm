@@ -1,0 +1,5 @@
+filegroup(
+    name = "atomvm",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)

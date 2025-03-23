@@ -8,6 +8,22 @@ bazel_dep(name = "buildifier_prebuilt", version = "8.0.1", dev_dependency = True
 #project deps
 bazel_dep(name = "platforms", version = "0.0.11")
 bazel_dep(name = "aspect_bazel_lib", version = "2.14.0")
+bazel_dep(name = "rules_oci", version = "2.2.3")
+
+#third_parties
+atomvm = use_extension("//:third_party/atomvm/extentions.bzl", "atomvm")
+use_repo(atomvm, "atomvm")
+
+oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+
+#to be moved in separate module
+oci.pull(
+    name = "idf_image_linux_amd64",
+    digest = "sha256:af084bbf1fbb9f851d0a99f98999ab316441c78ac214ec9da379907cdda63340",
+    image = "index.docker.io/espressif/idf",
+    platforms = ["linux/amd64"],
+)
+use_repo(oci, "idf_image_linux_amd64")
 
 #toolchain and platform registrations
 register_toolchains("@//toolchains:idf_toolchain")
